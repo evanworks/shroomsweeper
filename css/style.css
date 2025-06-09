@@ -35,9 +35,9 @@ body {
   letter-spacing: -0.02em;
 }
 
-.middle-left, .middle-right {
-  /* Empty sections - no background needed */
-}
+/*.middle-left, .middle-right {
+   Empty sections - no background needed 
+}*/
 
 #game {
   display: grid;
