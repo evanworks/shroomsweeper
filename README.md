@@ -1,1 +1,3 @@
 # shroomsweeper
+
+Minesweeper but mushrooms

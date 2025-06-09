@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
 body {
   margin: 0;
-  font-family: sans-serif;
-  background: #222;
+  font-family: 'Jersey 10', sans-serif;
+  background: #b86f50;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -30,9 +32,7 @@ body {
   margin: 0;
   text-align: center;
   font-size: 2.5rem;
-  font-family: 'Radio Canada', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.02em;
 }
 
 /*.middle-left, .middle-right {
@@ -43,9 +43,9 @@ body {
   display: grid;
   grid-template-columns: repeat(16, 24px);
   grid-template-rows: repeat(16, 24px);
-  gap: 1px;
-  background: #444;
+  background: #3f2832;
   border-radius: 8px;
+  gap: 2px;
   padding: 10px;
   margin: 0 auto;
   width: fit-content;
@@ -55,12 +55,13 @@ body {
 .tile {
   width: 24px;
   height: 24px;
-  background: #888;
+  background: url(img/dirt.png);
+  background-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 20px;
   cursor: pointer;
   user-select: none;
 }
@@ -71,21 +72,23 @@ body {
 }
 
 .tile.marked::before {
-  content: "🚩";
+  content: "";
 }
 
 .tile.revealed {
-  background: #ddd;
-  color: #000;
+  background: url(img/hole.png);
+  background-size: 24px;
+  color: #b86f50;
+  text-shadow: 1px 1px black;
   cursor: default;
 }
 
 .tile.revealed.marked {
-  background: #e00;
+  background: #e43b44;
 }
 
 .tile.bomb {
-  background: #e00;
+  background: #e43b44;
 }
 
 .counter {
@@ -103,14 +106,12 @@ body {
 
 .counter h2 {
   margin: 0 0 5px 0;
-  font-family: 'Radio Canada', sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
   color: #888;
 }
 
 #tile-count, #mine-count, #flag-count {
-  font-family: 'Radio Canada', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   color: #fff;
@@ -125,7 +126,6 @@ body {
   border: none;
   border-radius: 8px;
   color: #fff;
-  font-family: 'Radio Canada', sans-serif;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -138,3 +138,8 @@ body {
 #restart-button.visible {
   display: block;
 } 
+img {
+  width: 24px;
+  user-select: none;
+  pointer-events: none;
+}

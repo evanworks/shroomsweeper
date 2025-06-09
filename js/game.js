@@ -108,6 +108,13 @@ function toggleMark(r, c) {
   const key = `${r},${c}`;
   const wasMarked = tile.classList.contains("marked");
   tile.classList.toggle("marked");
+
+  if (tile.classList.contains("marked")) { 
+    tile.innerHTML = "<img src='css/img/flag.png'>";
+    
+  } else { 
+    tile.innerHTML = "";
+  }
   
   if (wasMarked) {
     flagsPlaced--;
@@ -147,7 +154,7 @@ function reveal(r, c) {
 
   if (mines.has(key)) {
     tile.classList.add("bomb");
-    tile.textContent = "💣";
+    tile.innerHTML = "<img src='css/img/bomb.png'>";
     minesHit++;
     mineCountElement.textContent = minesHit;
     minesMissed = mineCount - minesFlagged;
@@ -183,6 +190,7 @@ game.addEventListener("click", e => {
 
 game.addEventListener("contextmenu", e => {
   e.preventDefault();
+  console.log(e.target)
   if (!e.target.classList.contains("tile")) return;
   const r = parseInt(e.target.dataset.row);
   const c = parseInt(e.target.dataset.col);
