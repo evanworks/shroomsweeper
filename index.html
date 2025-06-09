@@ -4,128 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simple Minesweeper</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #222;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    #game {
-      display: grid;
-      grid-template-columns: repeat(24, 40px);
-      grid-template-rows: repeat(24, 40px);
-      gap: 1px;
-      background: #444;
-    }
-
-    .tile {
-      width: 40px;
-      height: 40px;
-      background: #888;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .tile.revealed {
-      background: #ddd;
-      color: #000;
-      cursor: default;
-    }
-
-    .tile.bomb {
-      background: #e00;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="game"></div>
-
-  <script>
-    const size = 24;
-    const mineCount = 99;
-    const game = document.getElementById("game");
-    const grid = [];
-    const mines = new Set();
-
-    // Initialize grid
-    for (let row = 0; row < size; row++) {
-      grid[row] = [];
-      for (let col = 0; col < size; col++) {
-        const tile = document.createElement("div");
-        tile.className = "tile";
-        tile.dataset.row = row;
-        tile.dataset.col = col;
-        game.appendChild(tile);
-        grid[row][col] = tile;
-      }
-    }
-
-    // Place mines
-    while (mines.size < mineCount) {
-      const r = Math.floor(Math.random() * size);
-      const c = Math.floor(Math.random() * size);
-      mines.add(`${r},${c}`);
-    }
-
-    // Count adjacent mines
-    function getMineCount(r, c) {
-      let count = 0;
-      for (let dr = -1; dr <= 1; dr++) {
-        for (let dc = -1; dc <= 1; dc++) {
-          const nr = r + dr;
-          const nc = c + dc;
-          if (mines.has(`${nr},${nc}`)) count++;
-        }
-      }
-      return count;
-    }
-
-    // Reveal tile
-    function reveal(r, c) {
-      const key = `${r},${c}`;
-      const tile = grid[r]?.[c];
-      if (!tile || tile.classList.contains("revealed")) return;
-
-      tile.classList.add("revealed");
-
-      if (mines.has(key)) {
-        tile.classList.add("bomb");
-        tile.textContent = "💣";
-        alert("Game Over!");
-        return;
-      }
-
-      const count = getMineCount(r, c);
-      if (count > 0) {
-        tile.textContent = count;
-      } else {
-        // Reveal surrounding tiles if 0
-        for (let dr = -1; dr <= 1; dr++) {
-          for (let dc = -1; dc <= 1; dc++) {
-            reveal(r + dr, c + dc);
-          }
-        }
-      }
-    }
-
-    // Click handler
-    game.addEventListener("click", e => {
-      if (!e.target.classList.contains("tile")) return;
-      const r = parseInt(e.target.dataset.row);
-      const c = parseInt(e.target.dataset.col);
-      reveal(r, c);
-    });
-  </script>
+  <div class="container">
+    <div class="top-row"><h1>Shroomsweeper</h1></div>
+    <div class="middle-left"></div>
+    <div id="game"></div>
+    <div class="middle-right">
+      <div class="counter">
+        <h2>Tiles Revealed</h2>
+        <div id="tile-count">0</div>
+      </div>
+      <div class="counter">
+        <h2>Mines Hit</h2>
+        <div id="mine-count">0</div>
+      </div>
+      <div class="counter">
+        <h2>Flags Placed</h2>
+        <div id="flag-count">0</div>
+      </div>
+      <div class="counter">
+        <h2>Mines Flagged</h2>
+        <div id="mines-flagged-count">0</div>
+      </div>
+      <div class="counter">
+        <h2>Mines Missed</h2>
+        <div id="mines-missed-count">0</div>
+      </div>
+      <button id="restart-button" class="hidden">Start New Game</button>
+    </div>
+  </div>
+  <script src="js/game.js"></script>
 </body>
 </html>
