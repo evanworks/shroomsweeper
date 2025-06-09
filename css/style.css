@@ -88,13 +88,13 @@ body {
 }
 
 .tile.bomb {
-  background: #e43b44;
+  background: #3f2832;
 }
 
 .counter {
   text-align: left;
   padding: 15px;
-  background: #444;
+  background: #743f39;
   border-radius: 8px;
   display: none;
   margin-bottom: 10px;
@@ -108,7 +108,7 @@ body {
   margin: 0 0 5px 0;
   font-weight: 400;
   font-size: 0.9rem;
-  color: #888;
+  color: #b86f50;
 }
 
 #tile-count, #mine-count, #flag-count {
@@ -142,4 +142,19 @@ img {
   width: 24px;
   user-select: none;
   pointer-events: none;
+  image-rendering: pixelated;
+}
+.tile.bomb img {
+  animation: bomb 0.1s ease-out;
+}
+@keyframes bomb {
+  0% {
+    transform: scale(2);
+  }
+  70% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
